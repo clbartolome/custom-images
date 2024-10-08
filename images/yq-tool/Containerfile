@@ -1,0 +1,17 @@
+# Use the RHEL 9 minimal base image
+FROM registry.access.redhat.com/ubi9:latest
+
+# Install wget and yq
+RUN dnf install -y wget && \
+    wget https://github.com/mikefarah/yq/releases/download/v4.35.1/yq_linux_amd64 -O /usr/local/bin/yq && \
+    chmod +x /usr/local/bin/yq && \
+    dnf clean all
+
+# Set the working directory
+WORKDIR /workspace
+
+# Entry point to run yq directly by default
+ENTRYPOINT ["/usr/local/bin/yq"]
+
+# Optionally, set CMD to display yq help
+CMD ["--help"]

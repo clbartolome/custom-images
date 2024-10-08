@@ -1,0 +1,4 @@
+---
+target_repository: quay.io/calopezb
+
+publish: true # Upload image to target repository

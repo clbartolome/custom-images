@@ -1,0 +1,23 @@
+---
+- name: Image Creator
+  hosts: localhost
+  gather_facts: false
+  collections:
+    - community.general
+
+  tasks:
+    - name: Build Image Locally
+      command: podman build -t {{ image_name }}:{{ image_version}} images/{{ image_name }}/.
+
+    - name: Tag Image
+      command: podman tag {{ image_name }}:{{ image_version}} {{ target_repository }}/{{ image_name }}:{{ image_version}}
+      when: (publish | bool == true)
+
+    - name: Publish Image
+      command: podman push {{ target_repository }}/{{ image_name }}:{{ image_version}}
+      when: (publish | bool == true)
+
+  vars_files:
+    - vars.yaml
+
+    
