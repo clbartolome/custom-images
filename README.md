@@ -23,3 +23,10 @@ ansible-playbook image-creator.yaml -e image_name=<image-name> -e image_version=
 # Image used to create Tekton Tasks with yq configured (to update yaml files values)
 ansible-playbook image-creator.yaml -e image_name=yq-tool -e image_version=1.0.0
 ```
+
+### git-utils
+
+```sh
+# Image used for running git commands
+ansible-playbook image-creator.yaml -e image_name=git-utils -e image_version=1.0.0
+```
